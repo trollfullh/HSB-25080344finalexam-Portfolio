@@ -130,7 +130,6 @@ body{
 .hero-section {
     width: 100%;
     padding: 80px 50px;
-    background: relative;
     background: linear-gradient(180deg, rgba(10, 34, 70, 0.5) 0%, rgba(5, 19, 41, 0.8) 100%);
     border-bottom: 1px solid rgba(0, 210, 255, 0.1);
     position: relative;
@@ -154,7 +153,7 @@ body{
     max-width: 1200px;
     margin: 0 auto;
     text-align: center;
-    animation: fadeInUp 0.8s ease out;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .hero-title {
@@ -315,6 +314,7 @@ body{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:25px;
+    margin-bottom: 25px;
 }
 
 .gallery img{
@@ -334,6 +334,17 @@ body{
     transform: scale(1.03) translateY(-4px);
     border-color: #00d2ff;
     box-shadow: 0 15px 35px rgba(0, 210, 255, 0.25);
+}
+
+.analysis-text {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 4px solid #00d2ff;
+    padding: 20px;
+    border-radius: 4px 16px 16px 4px;
+    line-height: 1.8;
+    color: #cbdcf0;
+    font-size: 15px;
+    text-align: justify;
 }
 
 .video-box iframe{
@@ -509,7 +520,7 @@ body{
 }
 
 @media(max-width:600px){
-    .nav-menu { display: none; } /* Trên mobile ẩn bớt menu chữ, có thể kéo dài dọc */
+    .nav-menu { display: none; }
     .hero-title { font-size: 38px; }
     .hero-section { padding: 50px 20px; }
     .gallery{ grid-template-columns:1fr; }
@@ -527,7 +538,6 @@ body{
         <div class="logo">🎓</div>
         <div class="title">Student Portfolio</div>
     </div>
-    <!-- Phân chia hạng mục bên phải -->
     <ul class="nav-menu">
         <li><a href="#intro-anchor" class="nav-link">Giới thiệu</a></li>
         <li><a href="#exercise-anchor" class="nav-link">Bài tập</a></li>
@@ -574,7 +584,7 @@ body{
         <div class="sidebar">
             <h3>Danh mục minh chứng</h3>
             <div class="menu-item active-menu" onclick="showSection('b1', this)">
-                📁 Bài 1: Thao tác tệp tin & thư mục
+                📁 Bài 1: Thao tác tệp & thư mục
             </div>
             <div class="menu-item" onclick="showSection('b2', this)">
                 🔍 Bài 2: Tìm kiếm học thuật
@@ -591,9 +601,12 @@ body{
             <div class="menu-item" onclick="showSection('b6', this)">
                 🛡️ Bài 6: Sử dụng AI có trách nhiệm
             </div>
-            <hr style="margin:20px 0; border: 0; border-top: 1px solid rgba(255,255,255,0.08);">
+            <hr style="margin:15px 0; border: 0; border-top: 1px solid rgba(255,255,255,0.08);">
             <div class="menu-item" onclick="showSection('video', this)">
                 🎬 VIDEO AI SẢN PHẨM
+            </div>
+            <div class="menu-item" onclick="showSection('tongket', this)">
+                📝 LỜI TỔNG KẾT
             </div>
         </div>
 
@@ -608,6 +621,9 @@ body{
                     <img src="images/bai1-3.jpg" alt="Minh chứng 3">
                     <img src="images/bai1-4.jpg" alt="Minh chứng 4">
                 </div>
+                <div class="analysis-text">
+                    <strong>Tóm tắt thực hiện:</strong> Em đã hoàn thành việc chuẩn hóa cấu trúc thư mục lưu trữ học tập cá nhân logic, khoa học và thiết lập quy tắc đặt tên tệp nhất quán giúp tối ưu hóa không gian lưu trữ đám mây cũng như tìm kiếm tài liệu nhanh chóng.
+                </div>
             </div>
 
             <!-- BÀI 2 -->
@@ -618,6 +634,9 @@ body{
                     <img src="images/bai2-2.jpg" alt="Minh chứng 2">
                     <img src="images/bai2-3.jpg" alt="Minh chứng 3">
                     <img src="images/bai2-4.jpg" alt="Minh chứng 4">
+                </div>
+                <div class="analysis-text">
+                    <strong>Tóm tắt thực hiện:</strong> Trình bày kết quả tìm kiếm học thuật bằng việc sử dụng linh hoạt các toán tử nâng cao trên công cụ tìm kiếm và lập bảng đánh giá chi tiết độ tin cậy của các nguồn thông tin đã thu thập theo tiêu chuẩn nghiêm ngặt.
                 </div>
             </div>
 
@@ -630,6 +649,9 @@ body{
                     <img src="images/bai3-3.jpg" alt="Minh chứng 3">
                     <img src="images/bai3-4.jpg" alt="Minh chứng 4">
                 </div>
+                <div class="analysis-text">
+                    <strong>Phân tích kết quả:</strong> Việc phân tích và so sánh giữa Prompt ban đầu (sơ sài) và Prompt cải tiến (rõ cấu trúc, ngữ cảnh) cho thấy chất lượng đầu ra từ AI được nâng cấp vượt trội. Prompt cải tiến giúp nội dung có chiều sâu học thuật, chính xác và bám sát mục tiêu nghiên cứu hơn.
+                </div>
             </div>
 
             <!-- BÀI 4 -->
@@ -640,6 +662,9 @@ body{
                     <img src="images/bai4-2.jpg" alt="Minh chứng 2">
                     <img src="images/bai4-3.jpg" alt="Minh chứng 3">
                     <img src="images/bai4-4.jpg" alt="Minh chứng 4">
+                </div>
+                <div class="analysis-text">
+                    Đây là minh chứng hoạt động của nhóm bọn em bằng việc sử dụng Google Meet để phối hợp làm việc, kết hợp sử dụng AI của CapCut để edit video và cuối cùng đã đạt được thành quả là video thuyết trình của bọn em.
                 </div>
             </div>
 
@@ -652,6 +677,9 @@ body{
                     <img src="images/bai5-3.jpg" alt="Minh chứng 3">
                     <img src="images/bai5-4.jpg" alt="Minh chứng 4">
                 </div>
+                <div class="analysis-text">
+                    Em đã áp dụng các AI của Google và ChatGPT như Flow hoặc Sora của ChatGPT để làm video AI xây dựng thử kênh YouTube + TikTok, và bọn em sử dụng Gemini và ChatGPT để lấy script và prompt cho các Video AI như trên ảnh.
+                </div>
             </div>
 
             <!-- BÀI 6 -->
@@ -663,6 +691,9 @@ body{
                     <img src="images/bai6-3.jpg" alt="Minh chứng 3">
                     <img src="images/bai6-4.jpg" alt="Minh chứng 4">
                 </div>
+                <div class="analysis-text">
+                    <strong>Quan điểm cá nhân:</strong> Dựa trên các nghiên cứu của Tạp chí Giáo dục và Dự thảo Quy chế của Bộ GD&ĐT, em nhận thức sâu sắc rằng AI chỉ đóng vai trò hỗ trợ đắc lực. Con người bắt buộc phải giữ tư duy độc lập, chủ động kiểm chứng thông tin nhằm bảo vệ tính liêm chính và sự trung thực học thuật trong kỷ nguyên số.
+                </div>
             </div>
 
             <!-- VIDEO SECTION -->
@@ -672,6 +703,15 @@ body{
                     <iframe src="https://www.youtube.com/embed/lGL8ldxi_F0" allowfullscreen></iframe>
                 </div>
             </div>
+
+            <!-- TỔNG KẾT SECTION -->
+            <div id="tongket" class="section">
+                <h2 class="section-title">Tổng kết hành trình & Trải nghiệm cá nhân</h2>
+                <div class="analysis-text" style="border-left-color: #00ffaa; background: rgba(0, 255, 170, 0.01);">
+                    Nhìn lại toàn bộ hành trình xây dựng Portfolio năng lực số này, cảm xúc đầu tiên của em là sự thấm mệt sau những giờ miệt mài nghiên cứu, thử nghiệm và tối ưu từng sản phẩm học tập. Tuy nhiên, đằng sau sự mệt mỏi ấy lại là một cảm giác thành tựu vô cùng lớn lao và xứng đáng. Việc tự tay ứng dụng một cách bài bản các công cụ Trí tuệ nhân tạo (AI) vào thực tiễn cuộc sống và học tập đã giúp em nâng cao tư duy số rõ rệt. Em hiểu được cách làm chủ công nghệ, biến AI thành người trợ lý đắc lực thay vì phụ thuộc một cách thụ động. Sự nỗ lực kiên trì này mang lại cho em những bài học kinh nghiệm sâu sắc và sự tự tin lớn để vững vàng bước vào môi trường giáo dục số hiện nay.
+                </div>
+            </div>
+
         </div>
     </div>
 
