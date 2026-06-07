@@ -6,409 +6,510 @@
 <title>Student Portfolio - Phạm Kiên</title>
 
 <style>
-
+/* --- KHỞI TẠO HỆ THỐNG VÀ HIỆU ỨNG GỐC --- */
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body{
-background:#f4f4f4;
+    background:#f8f9fa;
+    color: #333;
+}
+
+/* Hiệu ứng trượt và mờ dần cho phần nội dung (Fade-in & Slide-up) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hiệu ứng xuất hiện mượt mà cho từng tấm ảnh lẻ */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .header{
-padding:40px;
-background:white;
-border-bottom:2px solid #eee;
+    padding:40px;
+    background:white;
+    border-bottom:1px solid #e9ecef;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
 }
 
 .logo{
-font-size:60px;
-color:#8e6bbd;
+    font-size:50px;
+    color:#8e6bbd;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+.header:hover .logo {
+    transform: rotate(10deg) scale(1.1);
 }
 
 .title{
-font-size:48px;
-font-weight:bold;
-margin-top:10px;
+    font-size:38px;
+    font-weight:700;
+    margin-top:10px;
+    letter-spacing: -0.5px;
 }
 
 .container{
-display:grid;
-grid-template-columns:320px 1fr;
-gap:25px;
-padding:25px;
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:30px;
+    padding:30px;
 }
 
+/* --- SIDEBAR MENU ĐIỀU HƯỚNG --- */
 .sidebar{
-background:white;
-padding:20px;
-border-radius:12px;
-height:fit-content;
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    height:fit-content;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    position: sticky;
+    top: 30px;
 }
 
 .sidebar h3{
-color:#8e6bbd;
-margin-bottom:20px;
+    color:#8e6bbd;
+    margin-bottom:20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .menu-item{
-padding:12px;
-border-radius:8px;
-cursor:pointer;
-margin-bottom:8px;
-transition:.3s;
+    padding:14px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    margin-bottom:10px;
+    font-weight: 500;
+    color: #555;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-left: 4px solid transparent;
 }
 
+/* Trạng thái Hover của Menu */
 .menu-item:hover{
-background:#f1e8fb;
+    background:#f3ebfa;
+    color: #724da3;
+    transform: translateX(5px);
 }
 
+/* Trạng thái Active làm nổi bật Bài đang chọn */
+.menu-item.active-menu {
+    background: #eedffc;
+    color: #724da3;
+    border-left: 4px solid #8e6bbd;
+    font-weight: 600;
+}
+
+/* --- KHU VỰC NỘI DUNG CHÍNH --- */
 .about{
-background:#f4edf9;
-padding:20px;
-border-radius:12px;
-margin-bottom:20px;
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    padding:25px;
+    border-radius:16px;
+    margin-bottom:25px;
+    border: 1px solid #e9ecef;
+    box-shadow: inset 0 0 20px rgba(255,255,255,0.8);
 }
 
 .about h2{
-color:#8e6bbd;
-margin-bottom:15px;
+    color:#8e6bbd;
+    margin-bottom:15px;
+    font-size: 24px;
+}
+
+.about p {
+    line-height: 1.6;
+    color: #555;
 }
 
 .info{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:15px;
-margin-bottom:20px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    margin-bottom:30px;
 }
 
 .card{
-background:white;
-padding:20px;
-border-radius:12px;
-border:1px solid #ddd;
+    background:white;
+    padding:20px;
+    border-radius:16px;
+    border:1px solid #eef0f2;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    transition: all 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(142, 107, 189, 0.1);
 }
 
 .card-title{
-font-weight:bold;
-color:#8e6bbd;
-margin-bottom:10px;
+    font-weight:700;
+    color:#8e6bbd;
+    margin-bottom:8px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
 }
 
+/* --- HIỆU ỨNG CHUYỂN CẢNH PHÂN ĐOẠN --- */
 .section{
-display:none;
+    display:none;
 }
 
+/* Khi kích hoạt Active, kích hoạt Animation trượt lên mượt mà */
 .section.active{
-display:block;
+    display:block;
+    animation: fadeInUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 .section-title{
-font-size:28px;
-margin-bottom:20px;
-color:#444;
+    font-size:26px;
+    font-weight: 700;
+    margin-bottom:25px;
+    color:#222;
+    position: relative;
+    padding-left: 15px;
+}
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15%;
+    width: 5px;
+    height: 70%;
+    background: #8e6bbd;
+    border-radius: 4px;
 }
 
+/* --- LƯỚI HIỂN THỊ HÌNH ẢNH (GALLERY) --- */
 .gallery{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:20px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
 }
 
 .gallery img{
-width:100%;
-height:280px;
-object-fit:cover;
-border-radius:12px;
-cursor:pointer;
-transition:.3s;
+    width:100%;
+    height:280px;
+    object-fit:cover;
+    border-radius:14px;
+    cursor:pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0; /* Mặc định ẩn đi để chạy Animation đuổi nhau */
+    animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Tạo hiệu ứng staggered delay (ảnh xuất hiện đuổi nhau tuần tự) */
+.gallery img:nth-child(1) { animation-delay: 0.1s; }
+.gallery img:nth-child(2) { animation-delay: 0.2s; }
+.gallery img:nth-child(3) { animation-delay: 0.3s; }
+.gallery img:nth-child(4) { animation-delay: 0.4s; }
 
 .gallery img:hover{
-transform:scale(1.03);
+    transform: scale(1.04) translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
 }
 
+/* --- VIDEO AI --- */
 .video-box iframe{
-width:100%;
-height:550px;
-border:none;
-border-radius:12px;
+    width:100%;
+    height:520px;
+    border:none;
+    border-radius:16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
+/* --- TRÌNH XEM ẢNH PHÓNG TO (MODAL LIGHTBOX) --- */
 .modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.9);
-justify-content:center;
-align-items:center;
-z-index:999;
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(15, 10, 25, 0.92); /* Làm tối nền pha chút sắc tím sang trọng */
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.open {
+    display: flex;
+    opacity: 1;
 }
 
 .modal img{
-max-width:90%;
-max-height:90%;
+    max-width:85%;
+    max-height:85%;
+    border-radius: 8px;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.modal.open img {
+    transform: scale(1);
 }
 
 .close{
-position:absolute;
-top:20px;
-right:30px;
-font-size:40px;
-color:white;
-cursor:pointer;
+    position:absolute;
+    top:30px;
+    right:40px;
+    font-size:45px;
+    color:rgba(255,255,255,0.7);
+    cursor:pointer;
+    transition: color 0.2s;
+}
+.close:hover {
+    color: white;
 }
 
-@media(max-width:900px){
-
-.container{
-grid-template-columns:1fr;
+/* --- THIẾT KẾ ĐÁP ỨNG DI ĐỘNG (RESPONSIVE) --- */
+@media(max-width:1024px){
+    .container{
+        grid-template-columns:1fr;
+        padding:20px;
+    }
+    .sidebar {
+        position: static;
+    }
 }
 
-.info{
-grid-template-columns:1fr;
+@media(max-width:600px){
+    .info{
+        grid-template-columns:1fr;
+        gap: 12px;
+    }
+    .gallery{
+        grid-template-columns:1fr;
+    }
+    .video-box iframe{
+        height:260px;
+    }
+    .header {
+        padding: 25px;
+    }
+    .title {
+        font-size: 28px;
+    }
 }
-
-.gallery{
-grid-template-columns:1fr;
-}
-
-.video-box iframe{
-height:300px;
-}
-
-}
-
 </style>
 </head>
 
 <body>
 
 <div class="header">
-
-<div class="logo">🎓</div>
-
-<div class="title">
-Student Portfolio
-</div>
-
+    <div class="logo">🎓</div>
+    <div class="title">Student Portfolio</div>
 </div>
 
 <div class="container">
 
-<div class="sidebar">
+    <!-- SIDEBAR DIỄN HOẠT MENU -->
+    <div class="sidebar">
+        <h3>Tên các bài học</h3>
+        <div class="menu-item active-menu" onclick="showSection('b1', this)">
+            📁 Bài 1: Thao tác cơ bản với tệp tin và thư mục
+        </div>
+        <div class="menu-item" onclick="showSection('b2', this)">
+            🔍 Bài 2: Tìm kiếm và đánh giá thông tin học thuật
+        </div>
+        <div class="menu-item" onclick="showSection('b3', this)">
+            ✍️ Bài 3: Viết Prompt hiệu quả cho học tập
+        </div>
+        <div class="menu-item" onclick="showSection('b4', this)">
+            👥 Bài 4: Sử dụng công cụ trực tuyến cho dự án nhóm
+        </div>
+        <div class="menu-item" onclick="showSection('b5', this)">
+            🤖 Bài 5: Sử dụng AI tạo sinh để hỗ trợ nội dung
+        </div>
+        <div class="menu-item" onclick="showSection('b6', this)">
+            🛡️ Bài 6: Sử dụng AI có trách nhiệm
+        </div>
+        <hr style="margin:20px 0; border: 0; border-top: 1px solid #eee;">
+        <div class="menu-item" onclick="showSection('video', this)">
+            🎬 VIDEO AI
+        </div>
+    </div>
 
-<h3>Tên các bài học</h3>
+    <!-- KHU VỰC HIỂN THỊ NỘI DUNG -->
+    <div>
+        <div class="about">
+            <h2>Giới thiệu</h2>
+            <p>Chào mừng thầy cô và mọi người đã đến với bài Portfolio của em.</p>
+            <br>
+            <p>Mục tiêu học phần này của bản thân em với mục đích học tập và cho thấy việc áp dụng kỹ năng AI vào cuộc sống.</p>
+            <br>
+            <p>Trang portfolio này được AI hỗ trợ em tạo ra nhằm cho thấy tầm quan trọng của AI trong đời sống hiện nay.</p>
+        </div>
 
-<div class="menu-item" onclick="showSection('b1')">
-📁 Bài 1: Thao tác cơ bản với tệp tin và thư mục
+        <div class="info">
+            <div class="card">
+                <div class="card-title">Name</div>
+                <div style="font-weight: 600; font-size: 17px;">Phạm Kiên</div>
+                <small style="color:#777;">MSV-25080344</small>
+            </div>
+            <div class="card">
+                <div class="card-title">Field of Study</div>
+                <div style="font-weight: 600; font-size: 17px;">CNS và AI</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Academic Year</div>
+                <div style="font-weight: 600; font-size: 17px;">2025-2026</div>
+            </div>
+        </div>
+
+        <!-- BÀI 1 -->
+        <div id="b1" class="section active">
+            <h2 class="section-title">Bài 1: Thao tác cơ bản với tệp tin và thư mục</h2>
+            <div class="gallery">
+                <img src="images/bai1-1.jpg" alt="Minh chứng 1">
+                <img src="images/bai1-2.jpg" alt="Minh chứng 2">
+                <img src="images/bai1-3.jpg" alt="Minh chứng 3">
+                <img src="images/bai1-4.jpg" alt="Minh chứng 4">
+            </div>
+        </div>
+
+        <!-- BÀI 2 -->
+        <div id="b2" class="section">
+            <h2 class="section-title">Bài 2: Tìm kiếm và đánh giá thông tin học thuật</h2>
+            <div class="gallery">
+                <img src="images/bai2-1.jpg" alt="Minh chứng 1">
+                <img src="images/bai2-2.jpg" alt="Minh chứng 2">
+                <img src="images/bai2-3.jpg" alt="Minh chứng 3">
+                <img src="images/bai2-4.jpg" alt="Minh chứng 4">
+            </div>
+        </div>
+
+        <!-- BÀI 3 -->
+        <div id="b3" class="section">
+            <h2 class="section-title">Bài 3: Viết Prompt hiệu quả cho học tập</h2>
+            <div class="gallery">
+                <img src="images/bai3-1.jpg" alt="Minh chứng 1">
+                <img src="images/bai3-2.jpg" alt="Minh chứng 2">
+                <img src="images/bai3-3.jpg" alt="Minh chứng 3">
+                <img src="images/bai3-4.jpg" alt="Minh chứng 4">
+            </div>
+        </div>
+
+        <!-- BÀI 4 -->
+        <div id="b4" class="section">
+            <h2 class="section-title">Bài 4: Sử dụng công cụ trực tuyến cho dự án nhóm</h2>
+            <div class="gallery">
+                <img src="images/bai4-1.jpg" alt="Minh chứng 1">
+                <img src="images/bai4-2.jpg" alt="Minh chứng 2">
+                <img src="images/bai4-3.jpg" alt="Minh chứng 3">
+                <img src="images/bai4-4.jpg" alt="Minh chứng 4">
+            </div>
+        </div>
+
+        <!-- BÀI 5 -->
+        <div id="b5" class="section">
+            <h2 class="section-title">Bài 5: Sử dụng AI tạo sinh để hỗ trợ nội dung</h2>
+            <div class="gallery">
+                <img src="images/bai5-1.jpg" alt="Minh chứng 1">
+                <img src="images/bai5-2.jpg" alt="Minh chứng 2">
+                <img src="images/bai5-3.jpg" alt="Minh chứng 3">
+                <img src="images/bai5-4.jpg" alt="Minh chứng 4">
+            </div>
+        </div>
+
+        <!-- BÀI 6 -->
+        <div id="b6" class="section">
+            <h2 class="section-title">Bài 6: Sử dụng AI có trách nhiệm</h2>
+            <div class="gallery">
+                <img src="images/bai6-1.jpg" alt="Minh chứng 1">
+                <img src="images/bai6-2.jpg" alt="Minh chứng 2">
+                <img src="images/bai6-3.jpg" alt="Minh chứng 3">
+                <img src="images/bai6-4.jpg" alt="Minh chứng 4">
+            </div>
+        </div>
+
+        <!-- VIDEO SECTION -->
+        <div id="video" class="section">
+            <h2 class="section-title">VIDEO AI SẢN PHẨM TRUYỀN THÔNG</h2>
+            <div class="video-box">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="menu-item" onclick="showSection('b2')">
-🔍 Bài 2: Tìm kiếm và đánh giá thông tin học thuật
-</div>
-
-<div class="menu-item" onclick="showSection('b3')">
-✍️ Bài 3: Viết Prompt hiệu quả cho học tập
-</div>
-
-<div class="menu-item" onclick="showSection('b4')">
-👥 Bài 4: Sử dụng công cụ trực tuyến cho dự án nhóm
-</div>
-
-<div class="menu-item" onclick="showSection('b5')">
-🤖 Bài 5: Sử dụng AI tạo sinh để hỗ trợ nội dung
-</div>
-
-<div class="menu-item" onclick="showSection('b6')">
-🛡️ Bài 6: Sử dụng AI có trách nhiệm
-</div>
-
-<hr style="margin:20px 0;">
-
-<div class="menu-item" onclick="showSection('video')">
-🎬 VIDEO AI
-</div>
-
-</div>
-
-<div>
-
-<div class="about">
-
-<h2>Giới thiệu</h2>
-
-<p>
-Chào mừng thầy cô và mọi người đã đến với bài Portfolio của em.
-</p>
-
-<br>
-
-<p>
-Mục tiêu học phần này của bản thân em với mục đích học tập và cho thấy việc áp dụng kỹ năng AI vào cuộc sống.
-</p>
-
-<br>
-
-<p>
-Trang portfolio này được AI hỗ trợ em tạo ra nhằm cho thấy tầm quan trọng của AI trong đời sống hiện nay.
-</p>
-
-</div>
-
-<div class="info">
-
-<div class="card">
-<div class="card-title">Name</div>
-<div>Phạm Kiên</div>
-<small>MSV-25080344</small>
-</div>
-
-<div class="card">
-<div class="card-title">Field of Study</div>
-<div>CNS và AI</div>
-</div>
-
-<div class="card">
-<div class="card-title">Academic Year</div>
-<div>2025-2026</div>
-</div>
-
-</div>
-
-<div id="b1" class="section active">
-<h2 class="section-title">Bài 1</h2>
-
-<div class="gallery">
-<img src="images/bai1-1.jpg">
-<img src="images/bai1-2.jpg">
-<img src="images/bai1-3.jpg">
-<img src="images/bai1-4.jpg">
-</div>
-</div>
-
-<div id="b2" class="section">
-<h2 class="section-title">Bài 2</h2>
-
-<div class="gallery">
-<img src="images/bai2-1.jpg">
-<img src="images/bai2-2.jpg">
-<img src="images/bai2-3.jpg">
-<img src="images/bai2-4.jpg">
-</div>
-</div>
-
-<div id="b3" class="section">
-<h2 class="section-title">Bài 3</h2>
-
-<div class="gallery">
-<img src="images/bai3-1.jpg">
-<img src="images/bai3-2.jpg">
-<img src="images/bai3-3.jpg">
-<img src="images/bai3-4.jpg">
-</div>
-</div>
-
-<div id="b4" class="section">
-<h2 class="section-title">Bài 4</h2>
-
-<div class="gallery">
-<img src="images/bai4-1.jpg">
-<img src="images/bai4-2.jpg">
-<img src="images/bai4-3.jpg">
-<img src="images/bai4-4.jpg">
-</div>
-</div>
-
-<div id="b5" class="section">
-<h2 class="section-title">Bài 5</h2>
-
-<div class="gallery">
-<img src="images/bai5-1.jpg">
-<img src="images/bai5-2.jpg">
-<img src="images/bai5-3.jpg">
-<img src="images/bai5-4.jpg">
-</div>
-</div>
-
-<div id="b6" class="section">
-<h2 class="section-title">Bài 6</h2>
-
-<div class="gallery">
-<img src="images/bai6-1.jpg">
-<img src="images/bai6-2.jpg">
-<img src="images/bai6-3.jpg">
-<img src="images/bai6-4.jpg">
-</div>
-</div>
-
-<div id="video" class="section">
-
-<h2 class="section-title">
-VIDEO AI
-</h2>
-
-<div class="video-box">
-
-<iframe
-src="https://www.youtube.com/embed/VIDEO_ID"
-allowfullscreen>
-</iframe>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="modal" id="modal">
-<span class="close" onclick="closeModal()">&times;</span>
-<img id="modalImg">
+<!-- MODAL PHÓNG TO ẢNH MƯỢT MÀ -->
+<div class="modal" id="modal" onclick="closeModal()">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modalImg" onclick="event.stopPropagation()">
 </div>
 
 <script>
+function showSection(id, element){
+    // 1. Loại bỏ trạng thái active của tất cả các phần nội dung
+    document.querySelectorAll('.section').forEach(sec => {
+        sec.classList.remove('active');
+    });
 
-function showSection(id){
+    // 2. Kích hoạt phần nội dung được chọn
+    const activeSection = document.getElementById(id);
+    activeSection.classList.add('active');
 
-document.querySelectorAll('.section')
-.forEach(sec=>{
-sec.classList.remove('active');
-});
+    // 3. Reset lại hiệu ứng hoạt họa ảnh chạy đuổi nhau (Staggered Animation)
+    const images = activeSection.querySelectorAll('.gallery img');
+    images.forEach((img, index) => {
+        img.style.animation = 'none';
+        img.offsetHeight; // Lệnh kích hoạt ép trình duyệt render lại (Reflow)
+        img.style.animation = `scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 * (index + 1)}s forwards`;
+    });
 
-document.getElementById(id)
-.classList.add('active');
-
+    // 4. Cập nhật thanh highlight menu bên trái
+    document.querySelectorAll('.menu-item').forEach(item => {
+        item.classList.remove('active-menu');
+    });
+    element.classList.add('active-menu');
 }
 
-const images=document.querySelectorAll('.gallery img');
-const modal=document.getElementById('modal');
-const modalImg=document.getElementById('modalImg');
+// Lập trình sự kiện xử lý phóng to ảnh (Lightbox) mượt mà
+const images = document.querySelectorAll('.gallery img');
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modalImg');
 
-images.forEach(img=>{
-
-img.addEventListener('click',()=>{
-
-modal.style.display='flex';
-modalImg.src=img.src;
-
-});
-
+images.forEach(img => {
+    img.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        // Delay nhẹ để hiệu ứng mờ dần lớp nền kịp đồng bộ với ảnh phóng to
+        setTimeout(() => {
+            modal.classList.add('open');
+        }, 10);
+        modalImg.src = img.src;
+    });
 });
 
 function closeModal(){
-
-modal.style.display='none';
-
+    modal.classList.remove('open');
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300); // Khớp thời gian với 0.3s transition trong CSS
 }
-
 </script>
 
 </body>
