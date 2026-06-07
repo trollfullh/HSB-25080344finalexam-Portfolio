@@ -1,143 +1,414 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pì Noọng - Bánh cuốn Cao Bằng</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Portfolio - Phạm Kiên</title>
 
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    .title { font-family: 'Playfair Display', serif; }
-  </style>
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f4f4f4;
+}
+
+.header{
+padding:40px;
+background:white;
+border-bottom:2px solid #eee;
+}
+
+.logo{
+font-size:60px;
+color:#8e6bbd;
+}
+
+.title{
+font-size:48px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.container{
+display:grid;
+grid-template-columns:320px 1fr;
+gap:25px;
+padding:25px;
+}
+
+.sidebar{
+background:white;
+padding:20px;
+border-radius:12px;
+height:fit-content;
+}
+
+.sidebar h3{
+color:#8e6bbd;
+margin-bottom:20px;
+}
+
+.menu-item{
+padding:12px;
+border-radius:8px;
+cursor:pointer;
+margin-bottom:8px;
+transition:.3s;
+}
+
+.menu-item:hover{
+background:#f1e8fb;
+}
+
+.about{
+background:#f4edf9;
+padding:20px;
+border-radius:12px;
+margin-bottom:20px;
+}
+
+.about h2{
+color:#8e6bbd;
+margin-bottom:15px;
+}
+
+.info{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-bottom:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:12px;
+border:1px solid #ddd;
+}
+
+.card-title{
+font-weight:bold;
+color:#8e6bbd;
+margin-bottom:10px;
+}
+
+.section{
+display:none;
+}
+
+.section.active{
+display:block;
+}
+
+.section-title{
+font-size:28px;
+margin-bottom:20px;
+color:#444;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+}
+
+.gallery img{
+width:100%;
+height:280px;
+object-fit:cover;
+border-radius:12px;
+cursor:pointer;
+transition:.3s;
+}
+
+.gallery img:hover{
+transform:scale(1.03);
+}
+
+.video-box iframe{
+width:100%;
+height:550px;
+border:none;
+border-radius:12px;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.9);
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.modal img{
+max-width:90%;
+max-height:90%;
+}
+
+.close{
+position:absolute;
+top:20px;
+right:30px;
+font-size:40px;
+color:white;
+cursor:pointer;
+}
+
+@media(max-width:900px){
+
+.container{
+grid-template-columns:1fr;
+}
+
+.info{
+grid-template-columns:1fr;
+}
+
+.gallery{
+grid-template-columns:1fr;
+}
+
+.video-box iframe{
+height:300px;
+}
+
+}
+
+</style>
 </head>
 
-<body class="bg-black text-white">
+<body>
 
-<!-- Navbar -->
-<header class="fixed w-full z-50 bg-black/70 backdrop-blur flex justify-between items-center px-8 py-4">
-  <h1 class="title text-2xl">Pì Noọng</h1>
-  <nav class="space-x-6 text-sm">
-    <a href="#menu" class="hover:text-red-400">Menu</a>
-    <a href="#about" class="hover:text-red-400">Story</a>
-    <a href="#review" class="hover:text-red-400">Review</a>
-    <a href="#contact" class="hover:text-red-400">Contact</a>
-  </nav>
-</header>
+<div class="header">
 
-<!-- Hero -->
-<section class="h-screen flex items-center justify-center text-center"
-style="background:url('/anh1.png') center/cover no-repeat">
+<div class="logo">🎓</div>
 
-  <div class="bg-black/60 p-10 rounded-2xl" data-aos="fade-up">
-    <h2 class="title text-5xl mb-4">Bánh cuốn Cao Bằng</h2>
-    <p class="text-gray-300">Phở vịt quay chuẩn vị truyền thống</p>
-    <a href="#menu" class="inline-block mt-6 px-6 py-3 bg-red-500 rounded-full hover:bg-red-600">Xem menu</a>
-  </div>
+<div class="title">
+Student Portfolio
+</div>
 
-</section>
+</div>
 
-<!-- Gallery -->
-<section class="grid md:grid-cols-3 gap-4 p-6">
+<div class="container">
 
-  <img src="/anh1.png" class="rounded-2xl hover:scale-105 transition" data-aos="zoom-in">
+<div class="sidebar">
 
-  <img src="/anh2.png" class="rounded-2xl hover:scale-105 transition" data-aos="zoom-in">
+<h3>Tên các bài học</h3>
 
-  <img src="/anh3.png" class="rounded-2xl hover:scale-105 transition" data-aos="zoom-in">
+<div class="menu-item" onclick="showSection('b1')">
+📁 Bài 1: Thao tác cơ bản với tệp tin và thư mục
+</div>
 
-  <img src="/anh4.png" class="hidden">
+<div class="menu-item" onclick="showSection('b2')">
+🔍 Bài 2: Tìm kiếm và đánh giá thông tin học thuật
+</div>
 
-</section>
+<div class="menu-item" onclick="showSection('b3')">
+✍️ Bài 3: Viết Prompt hiệu quả cho học tập
+</div>
 
-<!-- Menu -->
-<section id="menu" class="p-12">
+<div class="menu-item" onclick="showSection('b4')">
+👥 Bài 4: Sử dụng công cụ trực tuyến cho dự án nhóm
+</div>
 
-  <h2 class="title text-4xl mb-10 text-center" data-aos="fade-up">Menu</h2>
+<div class="menu-item" onclick="showSection('b5')">
+🤖 Bài 5: Sử dụng AI tạo sinh để hỗ trợ nội dung
+</div>
 
-  <div class="grid md:grid-cols-2 gap-10">
+<div class="menu-item" onclick="showSection('b6')">
+🛡️ Bài 6: Sử dụng AI có trách nhiệm
+</div>
 
-    <!-- Bánh cuốn -->
-    <div data-aos="fade-right">
-      <h3 class="text-xl mb-4 text-red-400">Bánh cuốn Cao Bằng</h3>
-      <ul class="space-y-3 text-gray-300">
-        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Bánh cuốn không trứng</span><span>30k</span></li>
-        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Bánh cuốn 1 trứng</span><span>35k</span></li>
-        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Bánh cuốn 2 trứng</span><span>40k</span></li>
-        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Bánh cuốn đầy đủ</span><span>50k</span></li>
-      </ul>
-    </div>
+<hr style="margin:20px 0;">
 
-    <!-- Phở -->
-    <div data-aos="fade-left">
-      <h3 class="text-xl mb-4 text-red-400">Phở</h3>
-      <ul class="space-y-3 text-gray-300">
-        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Phở vịt quay</span><span>50k</span></li>
-        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Phở trộn vịt quay</span><span>50k</span></li>
-        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Phở trộn</span><span>45k</span></li>
-        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Miến vịt</span><span>50k</span></li>
-      </ul>
-    </div>
+<div class="menu-item" onclick="showSection('video')">
+🎬 VIDEO AI
+</div>
 
-    <!-- Đồ ăn kèm -->
-    <div data-aos="fade-right">
-      <h3 class="text-xl mb-4 text-red-400">Đồ ăn kèm</h3>
-      <ul class="space-y-3 text-gray-300">
-        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Vịt quay thêm</span><span>30k</span></li>
-        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Lòng mề</span><span>30k</span></li>
-        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Trứng</span><span>10k</span></li>
-      </ul>
-    </div>
+</div>
 
-    <!-- Nước uống -->
-    <div data-aos="fade-left">
-      <h3 class="text-xl mb-4 text-red-400">Nước uống</h3>
-      <ul class="space-y-3 text-gray-300">
-        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Trà đá</span><span>5k</span></li>
-        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Nước suối</span><span>10k</span></li>
-        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Nước ngọt</span><span>15k</span></li>
-      </ul>
-    </div>
+<div>
 
-  </div>
+<div class="about">
 
-</section>
+<h2>Giới thiệu</h2>
 
-<!-- About -->
-<section id="about" class="p-12 bg-white text-black text-center">
-  <h2 class="title text-4xl mb-6">Câu chuyện</h2>
-  <p class="max-w-2xl mx-auto">Pì Noọng mang đến hương vị Cao Bằng truyền thống với bánh cuốn nóng và phở vịt quay đậm đà.</p>
-</section>
+<p>
+Chào mừng thầy cô và mọi người đã đến với bài Portfolio của em.
+</p>
 
-<!-- Review -->
-<section id="review" class="p-12 text-center">
-  <h2 class="title text-4xl mb-10">Khách hàng nói gì</h2>
-  <div class="grid md:grid-cols-3 gap-6">
-    <div class="bg-white/10 p-6 rounded-2xl">Ngon xuất sắc ⭐⭐⭐⭐⭐</div>
-    <div class="bg-white/10 p-6 rounded-2xl">Vịt quay rất đậm vị ⭐⭐⭐⭐⭐</div>
-    <div class="bg-white/10 p-6 rounded-2xl">Sẽ quay lại lần nữa ⭐⭐⭐⭐⭐</div>
-  </div>
-</section>
+<br>
 
-<!-- Contact -->
-<section id="contact" class="p-12 text-center">
-  <h2 class="title text-4xl mb-6">Liên hệ</h2>
-  <p>📞 0929 913 408</p>
-  <p>📍 Cao Bằng</p>
-</section>
+<p>
+Mục tiêu học phần này của bản thân em với mục đích học tập và cho thấy việc áp dụng kỹ năng AI vào cuộc sống.
+</p>
 
-<!-- Button call -->
-<a href="tel:0929913408" class="fixed bottom-6 right-6 bg-red-500 p-4 rounded-full">📞</a>
+<br>
 
-<footer class="text-center text-gray-500 p-6">
-  © 2026 Pì Noọng
-</footer>
+<p>
+Trang portfolio này được AI hỗ trợ em tạo ra nhằm cho thấy tầm quan trọng của AI trong đời sống hiện nay.
+</p>
+
+</div>
+
+<div class="info">
+
+<div class="card">
+<div class="card-title">Name</div>
+<div>Phạm Kiên</div>
+<small>MSV-25080344</small>
+</div>
+
+<div class="card">
+<div class="card-title">Field of Study</div>
+<div>CNS và AI</div>
+</div>
+
+<div class="card">
+<div class="card-title">Academic Year</div>
+<div>2025-2026</div>
+</div>
+
+</div>
+
+<div id="b1" class="section active">
+<h2 class="section-title">Bài 1</h2>
+
+<div class="gallery">
+<img src="images/bai1-1.jpg">
+<img src="images/bai1-2.jpg">
+<img src="images/bai1-3.jpg">
+<img src="images/bai1-4.jpg">
+</div>
+</div>
+
+<div id="b2" class="section">
+<h2 class="section-title">Bài 2</h2>
+
+<div class="gallery">
+<img src="images/bai2-1.jpg">
+<img src="images/bai2-2.jpg">
+<img src="images/bai2-3.jpg">
+<img src="images/bai2-4.jpg">
+</div>
+</div>
+
+<div id="b3" class="section">
+<h2 class="section-title">Bài 3</h2>
+
+<div class="gallery">
+<img src="images/bai3-1.jpg">
+<img src="images/bai3-2.jpg">
+<img src="images/bai3-3.jpg">
+<img src="images/bai3-4.jpg">
+</div>
+</div>
+
+<div id="b4" class="section">
+<h2 class="section-title">Bài 4</h2>
+
+<div class="gallery">
+<img src="images/bai4-1.jpg">
+<img src="images/bai4-2.jpg">
+<img src="images/bai4-3.jpg">
+<img src="images/bai4-4.jpg">
+</div>
+</div>
+
+<div id="b5" class="section">
+<h2 class="section-title">Bài 5</h2>
+
+<div class="gallery">
+<img src="images/bai5-1.jpg">
+<img src="images/bai5-2.jpg">
+<img src="images/bai5-3.jpg">
+<img src="images/bai5-4.jpg">
+</div>
+</div>
+
+<div id="b6" class="section">
+<h2 class="section-title">Bài 6</h2>
+
+<div class="gallery">
+<img src="images/bai6-1.jpg">
+<img src="images/bai6-2.jpg">
+<img src="images/bai6-3.jpg">
+<img src="images/bai6-4.jpg">
+</div>
+</div>
+
+<div id="video" class="section">
+
+<h2 class="section-title">
+VIDEO AI
+</h2>
+
+<div class="video-box">
+
+<iframe
+src="https://www.youtube.com/embed/VIDEO_ID"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="modal" id="modal">
+<span class="close" onclick="closeModal()">&times;</span>
+<img id="modalImg">
+</div>
 
 <script>
-  AOS.init();
+
+function showSection(id){
+
+document.querySelectorAll('.section')
+.forEach(sec=>{
+sec.classList.remove('active');
+});
+
+document.getElementById(id)
+.classList.add('active');
+
+}
+
+const images=document.querySelectorAll('.gallery img');
+const modal=document.getElementById('modal');
+const modalImg=document.getElementById('modalImg');
+
+images.forEach(img=>{
+
+img.addEventListener('click',()=>{
+
+modal.style.display='flex';
+modalImg.src=img.src;
+
+});
+
+});
+
+function closeModal(){
+
+modal.style.display='none';
+
+}
+
 </script>
 
 </body>
